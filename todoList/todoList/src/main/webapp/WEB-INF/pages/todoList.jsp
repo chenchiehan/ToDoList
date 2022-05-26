@@ -235,7 +235,7 @@
 				type:"get",
 				success:function(lists){
 					$.each(lists, function(index, list){
-						var newList = $("<li class='list-group-item'></li><br>").text(list.finishedDiscription)
+						var newList = $("<li class='list-group-item'></li><br>").text(list.finishedDiscription + list.finidhedAt)
 						
 						$("#finishedList").append(newList)
 					})
