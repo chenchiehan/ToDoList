@@ -81,6 +81,13 @@
 	border: none;
 }
 
+#finishDate{
+	float: right;
+
+
+}
+
+
 
 
 </style>
@@ -235,9 +242,10 @@
 				type:"get",
 				success:function(lists){
 					$.each(lists, function(index, list){
-						var newList = $("<li class='list-group-item'></li><br>").text(list.finishedDiscription + list.finidhedAt)
+						var newList = $("<li class='list-group-item'>" + list.finishedDiscription + "<span id='finishDate'>"+ list.finishedAt +"</span> </li>")
 						
 						$("#finishedList").append(newList)
+				
 					})
 						$("#unfinishedList").hide();
 						$("#finishedList").show();
