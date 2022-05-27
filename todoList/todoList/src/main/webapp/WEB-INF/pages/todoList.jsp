@@ -158,7 +158,7 @@
 	<script>
 		
 		function addToDoList(){
-			var Discription = $("#discription").text();
+			var Discription = $("#discription").val();
 			
 			if(Discription==null || Discription==""){
 				Swal.fire({
