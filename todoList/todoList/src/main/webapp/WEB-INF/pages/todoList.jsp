@@ -22,6 +22,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 	crossorigin="anonymous"></script>	
+<!-- sweetalert	 -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
 
 </head>
 
@@ -158,8 +160,17 @@
 		function addToDoList(){
 			var Discription = $("#discription").text();
 			
+			if(Discription==null || Discription==""){
+				Swal.fire({
+							position : 'center',
+							icon : 'error',
+							title : '輸入欄位不可空白',
+							showConfirmButton : false,
+							timer : 2000
+						})
+			}else{
 
-			$.ajax({
+				$.ajax({
 				url:$("#contextRoot").val() + "/insertToDoList.controller",
 				type:"get",
 				contentType : "text/html;charset=utf-8",
@@ -171,10 +182,22 @@
 					}
 				}
 			})
+			}
+		
 		}
 
 		function addFinishedList(){
 
+			Swal.fire({
+			title: '事項已完成?',
+			showDenyButton: true,
+			confirmButtonText: '確認',
+			denyButtonText: `取消`,
+			}).then((result) => {
+			/* Read more about isConfirmed, isDenied below */
+			if (result.isConfirmed) {
+				
+				
 			$.ajax({
 				url:$("#contextRoot").val() + "/insertFinishedList.controller",
 				type:"get",
@@ -182,10 +205,21 @@
 				data: $("#finishedListForm").serialize(),
 				success:function(result){
 					if(result=="insertSuccess"){
-
+						Swal.fire('已成功', '', 'success')
 					}
 				}
 			})
+				setTimeout(editProduct,1500)
+			} else if (result.isDenied) {
+			
+			}
+			})
+
+
+
+
+
+
 		}
 
 
